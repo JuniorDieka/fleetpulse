@@ -628,7 +628,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Banro Corp Namoya**: For providing the opportunity to work on and develop this project
+- **Namoya Mine Location**: Fictional demo location inspired by DRC gold mining operations
 - **CAT 777D Specifications**: Caterpillar Inc. technical documentation
 - **Weibull Analysis**: Abernethy, R. B. (2006). *The New Weibull Handbook*
 - **Mining Industry Benchmarks**: Society for Mining, Metallurgy & Exploration (SME)
