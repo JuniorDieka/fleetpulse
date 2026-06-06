@@ -1,0 +1,100 @@
+# FleetPulse Configuration
+# Central configuration for the entire pipeline
+
+fleet:
+  size: 50
+  truck_id_prefix: "TRUCK"
+  degradation_truck_count: 5
+  degradation_truck_ids: ["TRUCK-003", "TRUCK-012", "TRUCK-027", "TRUCK-038", "TRUCK-045"]
+
+simulator:
+  interval_seconds: 10
+  kafka_enabled: true
+  lite_mode: false
+  
+sensors:
+  engine_temp:
+    min: 60.0
+    max: 110.0
+    mean: 85.0
+    stddev: 8.0
+    physical_max: 150.0
+    physical_min: -20.0
+  hydraulic_pressure:
+    min: 2000.0
+    max: 3500.0
+    mean: 2800.0
+    stddev: 200.0
+    physical_min: 0.0
+  payload_weight:
+    min: 0.0
+    max: 100.0
+    mean: 75.0
+    stddev: 15.0
+  vibration_level:
+    min: 0.5
+    max: 8.0
+    mean: 3.5
+    stddev: 1.2
+  fuel_consumption:
+    min: 80.0
+    max: 150.0
+    mean: 115.0
+    stddev: 15.0
+  odometer_hours:
+    initial_min: 5000.0
+    initial_max: 25000.0
+    increment_per_reading: 0.0028
+
+kafka:
+  bootstrap_servers: "localhost:9092"
+  topic: "fleet_telemetry"
+  consumer_group: "fleetpulse_consumer"
+  auto_offset_reset: "earliest"
+  batch_size: 100
+  batch_timeout_seconds: 30
+
+storage:
+  landing_zone: "./data/landing"
+  warehouse_path: "./data/warehouse/fleetpulse.duckdb"
+  partition_by: ["date", "truck_id"]
+
+dbt:
+  project_dir: "./dbt_project"
+  profiles_dir: "./dbt_project"
+  target: "dev"
+
+analytics:
+  weibull:
+    random_seed: 42
+    prediction_horizon_hours: 50.0
+    min_failures_for_fit: 3
+  anomaly:
+    rolling_window_hours: 24
+    warning_threshold_sigma: 2.0
+    critical_threshold_sigma: 3.0
+    min_baseline_samples: 100
+  reliability:
+    mtbf_calculation_interval_hours: 24
+    mttr_calculation_interval_hours: 24
+
+alerts:
+  output_dir: "./alerts"
+  check_interval_minutes: 5
+  webhook_url: ""
+  enable_file_output: true
+  enable_webhook: false
+
+streamlit:
+  port: 8501
+  refresh_interval_seconds: 30
+  page_title: "FleetPulse - Mining Fleet Maintenance Dashboard"
+
+airflow:
+  landing_zone_check_interval: "*/2 * * * *"
+  data_aware_assets_enabled: true
+
+logging:
+  level: "INFO"
+  format: "json"
+  log_dir: "./logs"

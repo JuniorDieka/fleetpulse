@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg_telemetry
+    description: >
+      Staging model for haul truck telemetry data.
+      Parses, cleans, and deduplicates raw sensor readings from the landing zone.
+      Flags outliers based on physical sensor limits.
+
+    columns:
+      - name: truck_id
+        description: Unique truck identifier (TRUCK-001 to TRUCK-050)
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_trucks')
+              field: truck_id
+
+      - name: timestamp
+        description: Sensor reading timestamp (UTC)
+        tests:
+          - not_null
+
+      - name: engine_temp_c
+        description: Engine temperature in Celsius
+        tests:
+          - not_null
+
+      - name: hydraulic_pressure_psi
+        description: Hydraulic system pressure in PSI
+        tests:
+          - not_null
+
+      - name: payload_weight_tons
+        description: Current payload weight in metric tons
+        tests:
+          - not_null
+
+      - name: vibration_level_mm_s
+        description: Vibration level in mm/s
+        tests:
+          - not_null
+
+      - name: fuel_consumption_l_hr
+        description: Fuel consumption rate in liters per hour
+        tests:
+          - not_null
+
+      - name: odometer_hours
+        description: Cumulative operating hours
+        tests:
+          - not_null
+
+      - name: is_outlier
+        description: Flag indicating if reading contains outlier values
+        tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+
+      - name: ingested_at
+        description: Timestamp when data was ingested into the warehouse
+        tests:
+          - not_null

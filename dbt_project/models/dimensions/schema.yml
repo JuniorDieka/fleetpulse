@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: dim_trucks
+    description: >
+      Dimension table containing static metadata for all haul trucks in the fleet.
+      Includes model specifications, purchase information, and operational assignments.
+
+    columns:
+      - name: truck_id
+        description: Unique truck identifier (primary key)
+        tests:
+          - unique
+          - not_null
+
+      - name: model
+        description: Truck model (e.g., CAT 777D)
+        tests:
+          - not_null
+
+      - name: purchase_year
+        description: Year the truck was purchased
+        tests:
+          - not_null
+
+      - name: engine_type
+        description: Engine type/model
+        tests:
+          - not_null
+
+      - name: pit_zone
+        description: Assigned mining pit zone (North, South, East, West)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['North', 'South', 'East', 'West']
+
+      - name: maintenance_tier
+        description: Maintenance priority tier (Premium, Standard, Basic)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Premium', 'Standard', 'Basic']

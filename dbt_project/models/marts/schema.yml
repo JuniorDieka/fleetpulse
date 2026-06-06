@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: fct_hourly_sensor_aggregates
+    description: >
+      Hourly aggregated sensor statistics per truck.
+      Provides statistical summaries (mean, stddev, min, max) for trend analysis
+      and anomaly detection baseline calculations.
+
+    columns:
+      - name: truck_id
+        description: Truck identifier
+        tests:
+          - not_null
+
+      - name: hour_timestamp
+        description: Hour timestamp (truncated to hour)
+        tests:
+          - not_null
+
+      - name: record_count
+        description: Number of readings in the hour
+        tests:
+          - not_null
+
+  - name: fct_maintenance_events
+    description: >
+      Historical maintenance and failure events for the fleet.
+      Contains breakdown history with failure types, downtime, and repair durations.
+      Used for reliability metrics (MTBF, MTTR) and Weibull analysis.
+
+    columns:
+      - name: event_id
+        description: Unique event identifier
+        tests:
+          - unique
+          - not_null
+
+      - name: truck_id
+        description: Truck identifier
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_trucks')
+              field: truck_id
+
+      - name: failure_timestamp
+        description: When the failure occurred
+        tests:
+          - not_null
+
+      - name: failure_type
+        description: Type of failure (Engine, Hydraulic, Transmission, etc.)
+        tests:
+          - not_null
+
+      - name: downtime_hours
+        description: Total downtime including diagnosis and repair
+        tests:
+          - not_null
+
+      - name: repair_hours
+        description: Actual repair time (subset of downtime)
+        tests:
+          - not_null
+
+      - name: odometer_at_failure
+        description: Truck operating hours at time of failure
+        tests:
+          - not_null

@@ -1,0 +1,32 @@
+# FleetPulse Application Dependencies (without Airflow)
+# For Streamlit, Simulator, and Analytics containers
+
+# Core Data Processing
+pandas==2.2.0
+numpy==1.26.3
+pyarrow==15.0.0
+duckdb==1.0.0
+
+# Statistical Analysis
+scipy==1.12.0
+
+# Streaming & Messaging
+kafka-python==2.0.2
+
+# Data Transformation
+dbt-core==1.7.7
+dbt-duckdb==1.7.2
+
+# Dashboard & Visualization
+streamlit==1.31.0
+plotly==5.18.0
+
+# Logging & Observability
+python-json-logger==2.0.7
+structlog==24.1.0
+
+# Configuration
+pyyaml==6.0.1
+
+# HTTP & Webhooks
+requests==2.31.0

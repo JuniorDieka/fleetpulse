@@ -1,0 +1,9 @@
+fleetpulse:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../data/warehouse/fleetpulse.duckdb
+      threads: 4
+      extensions:
+        - parquet

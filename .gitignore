@@ -1,0 +1,91 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Data & Databases
+data/
+*.duckdb
+*.duckdb.wal
+*.parquet
+*.csv
+!dbt_project/seeds/*.csv
+
+# Logs
+logs/
+*.log
+airflow/logs/
+
+# Alerts
+alerts/
+
+# Airflow
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_admin_password.txt
+
+# dbt
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff
+.ruff_cache/
+
+# Environment Variables
+.env
+.env.local
+
+# Docker
+docker-compose.override.yml
+
+# Temporary Files
+*.tmp
+*.bak
+.cache/
+
+# Temporary bypass scripts (used for demo setup, not for production)
+scripts/populate_db.py

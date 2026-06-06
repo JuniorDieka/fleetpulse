@@ -1,0 +1,38 @@
+name: 'fleetpulse'
+version: '1.0.0'
+config-version: 2
+
+profile: 'fleetpulse'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
+
+models:
+  fleetpulse:
+    staging:
+      +materialized: view
+      +schema: staging
+    dimensions:
+      +materialized: table
+      +schema: dimensions
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  fleetpulse:
+    +schema: seeds
+
+vars:
+  engine_temp_min: -20
+  engine_temp_max: 150
+  hydraulic_pressure_min: 0
