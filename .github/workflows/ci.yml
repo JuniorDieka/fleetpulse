@@ -74,6 +74,15 @@ jobs:
       run: |
         pip install dbt-core dbt-duckdb
 
+    - name: Create data directories
+      run: |
+        mkdir -p data/warehouse
+        mkdir -p data/landing
+
+    - name: Initialize DuckDB database
+      run: |
+        python -c "import duckdb; duckdb.connect('data/warehouse/fleetpulse.duckdb').close()"
+
     - name: dbt parse
       run: |
         cd dbt_project
