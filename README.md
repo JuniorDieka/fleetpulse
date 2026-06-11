@@ -1,4 +1,4 @@
-# 🚛 FleetPulse
+# FleetPulse
 
 **Predictive Maintenance Pipeline for Mining Fleet Operations**
 
